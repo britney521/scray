@@ -1,0 +1,7 @@
+beautifulsoup4
+loguru
+numpy
+opencv-python-headless
+pillow
+pycryptodome
+requests
