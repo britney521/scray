@@ -1,0 +1,659 @@
+[
+  {
+    "city_name": "福建省福州市",
+    "city_short_name": "福建省福州市",
+    "city_code": "350100",
+    "districts": [
+      {
+        "area_name": "福建省福州市鼓楼区",
+        "area_short_name": "鼓楼区",
+        "area_code": "350102",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市台江区",
+        "area_short_name": "台江区",
+        "area_code": "350103",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市仓山区",
+        "area_short_name": "仓山区",
+        "area_code": "350104",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市晋安区",
+        "area_short_name": "晋安区",
+        "area_code": "350111",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市马尾区",
+        "area_short_name": "马尾区",
+        "area_code": "350105",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市福清市",
+        "area_short_name": "福清市",
+        "area_code": "350181",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市长乐区",
+        "area_short_name": "长乐区",
+        "area_code": "350112",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市闽侯县",
+        "area_short_name": "闽侯县",
+        "area_code": "350121",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市连江县",
+        "area_short_name": "连江县",
+        "area_code": "350122",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市闽清县",
+        "area_short_name": "闽清县",
+        "area_code": "350124",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市罗源县",
+        "area_short_name": "罗源县",
+        "area_code": "350123",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市永泰县",
+        "area_short_name": "永泰县",
+        "area_code": "350125",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市高新区",
+        "area_short_name": "高新区",
+        "area_code": "350169",
+        "super_code": "350100"
+      },
+      {
+        "area_name": "福建省福州市新区",
+        "area_short_name": "新区",
+        "area_code": "350167",
+        "super_code": "350100"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省厦门市",
+    "city_short_name": "福建省厦门市",
+    "city_code": "350200",
+    "districts": [
+      {
+        "area_name": "福建省厦门市思明区",
+        "area_short_name": "福建省厦门市思明区",
+        "area_code": "350203",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门市海沧区",
+        "area_short_name": "福建省厦门市海沧区",
+        "area_code": "350205",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门市湖里区",
+        "area_short_name": "福建省厦门市湖里区",
+        "area_code": "350206",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门市集美区",
+        "area_short_name": "福建省厦门市集美区",
+        "area_code": "350211",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门市同安区",
+        "area_short_name": "福建省厦门市同安区",
+        "area_code": "350212",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门市翔安区",
+        "area_short_name": "福建省厦门市翔安区",
+        "area_code": "350213",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门鼓浪屿",
+        "area_short_name": "福建省厦门鼓浪屿",
+        "area_code": "350297",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门火炬管委会",
+        "area_short_name": "福建省厦门火炬管委会",
+        "area_code": "350298",
+        "super_code": "350200"
+      },
+      {
+        "area_name": "福建省厦门自贸委",
+        "area_short_name": "福建省厦门自贸委",
+        "area_code": "350299",
+        "super_code": "350200"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省漳州市",
+    "city_short_name": "福建省漳州市",
+    "city_code": "350600",
+    "districts": [
+      {
+        "area_name": "福建省漳州市芗城区",
+        "area_short_name": "芗城区",
+        "area_code": "350602",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市龙文区",
+        "area_short_name": "龙文区",
+        "area_code": "350603",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市龙海市",
+        "area_short_name": "龙海市",
+        "area_code": "350681",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市漳浦县",
+        "area_short_name": "漳浦县",
+        "area_code": "350623",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市云霄县",
+        "area_short_name": "云霄县",
+        "area_code": "350622",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市诏安县",
+        "area_short_name": "诏安县",
+        "area_code": "350624",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市东山县",
+        "area_short_name": "东山县",
+        "area_code": "350626",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市平和县",
+        "area_short_name": "平和县",
+        "area_code": "350628",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市南靖县",
+        "area_short_name": "南靖县",
+        "area_code": "350627",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市长泰区",
+        "area_short_name": "长泰区",
+        "area_code": "350625",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建省漳州市华安县",
+        "area_short_name": "华安县",
+        "area_code": "350629",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "漳州招商局经济开发区",
+        "area_short_name": "漳州开发区",
+        "area_code": "350690",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "常山华侨经济开发区",
+        "area_short_name": "漳州常山开发区",
+        "area_code": "350694",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "福建漳州古雷经济开发区",
+        "area_short_name": "漳州古雷开发区",
+        "area_code": "350691",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "漳州台商投资区",
+        "area_short_name": "漳州台商投资区",
+        "area_code": "350692",
+        "super_code": "350600"
+      },
+      {
+        "area_name": "漳州高新技术开发区",
+        "area_short_name": "漳州高新区",
+        "area_code": "350693",
+        "super_code": "350600"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省泉州市",
+    "city_short_name": "福建省泉州市",
+    "city_code": "350500",
+    "districts": [
+      {
+        "area_name": "福建省泉州市鲤城区",
+        "area_short_name": "鲤城区",
+        "area_code": "350502",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市丰泽区",
+        "area_short_name": "丰泽区",
+        "area_code": "350503",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市洛江区",
+        "area_short_name": "洛江区",
+        "area_code": "350504",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市泉港区",
+        "area_short_name": "泉港区",
+        "area_code": "350505",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市晋江市",
+        "area_short_name": "晋江市",
+        "area_code": "350582",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市南安市",
+        "area_short_name": "南安市",
+        "area_code": "350583",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市石狮市",
+        "area_short_name": "石狮市",
+        "area_code": "350581",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市惠安县",
+        "area_short_name": "惠安县",
+        "area_code": "350521",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市安溪县",
+        "area_short_name": "安溪县",
+        "area_code": "350524",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市德化县",
+        "area_short_name": "德化县",
+        "area_code": "350526",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "福建省泉州市永春县",
+        "area_short_name": "永春县",
+        "area_code": "350525",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "泉州台商投资区管委会",
+        "area_short_name": "台商",
+        "area_code": "350599",
+        "super_code": "350500"
+      },
+      {
+        "area_name": "泉州开发区管委会",
+        "area_short_name": "经开区",
+        "area_code": "350598",
+        "super_code": "350500"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省莆田市",
+    "city_short_name": "福建省莆田市",
+    "city_code": "350300",
+    "districts": [
+      {
+        "area_name": "福建省莆田市涵江区",
+        "area_short_name": "涵江区",
+        "area_code": "350303",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "福建省莆田市城厢区",
+        "area_short_name": "城厢区",
+        "area_code": "350302",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "福建省莆田市荔城区",
+        "area_short_name": "荔城区",
+        "area_code": "350304",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "福建省莆田市仙游县",
+        "area_short_name": "仙游县",
+        "area_code": "350322",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "福建省莆田市秀屿区",
+        "area_short_name": "秀屿区",
+        "area_code": "350305",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "湄洲湾经济开发区",
+        "area_short_name": "湄洲岛",
+        "area_code": "350391",
+        "super_code": "350300"
+      },
+      {
+        "area_name": "北岸经济开发区",
+        "area_short_name": "北岸区",
+        "area_code": "350392",
+        "super_code": "350300"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省三明市",
+    "city_short_name": "福建省三明市",
+    "city_code": "350400",
+    "districts": [
+      {
+        "area_name": "福建省三明市三元区",
+        "area_short_name": "三元区",
+        "area_code": "350403",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市永安市",
+        "area_short_name": "永安市",
+        "area_code": "350481",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市清流县",
+        "area_short_name": "清流县",
+        "area_code": "350423",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市宁化县",
+        "area_short_name": "宁化县",
+        "area_code": "350424",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市建宁县",
+        "area_short_name": "建宁县",
+        "area_code": "350430",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市泰宁县",
+        "area_short_name": "泰宁县",
+        "area_code": "350429",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市明溪县",
+        "area_short_name": "明溪县",
+        "area_code": "350421",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市将乐县",
+        "area_short_name": "将乐县",
+        "area_code": "350428",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市沙县",
+        "area_short_name": "沙县",
+        "area_code": "350427",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市尤溪县",
+        "area_short_name": "尤溪县",
+        "area_code": "350426",
+        "super_code": "350400"
+      },
+      {
+        "area_name": "福建省三明市大田县",
+        "area_short_name": "大田县",
+        "area_code": "350425",
+        "super_code": "350400"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省南平市",
+    "city_short_name": "福建省南平市",
+    "city_code": "350700",
+    "districts": [
+      {
+        "area_name": "福建省南平市延平区",
+        "area_short_name": "延平区",
+        "area_code": "350702",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市邵武市",
+        "area_short_name": "邵武市",
+        "area_code": "350781",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市武夷山市",
+        "area_short_name": "武夷山市",
+        "area_code": "350782",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市建瓯市",
+        "area_short_name": "建瓯市",
+        "area_code": "350783",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市建阳区",
+        "area_short_name": "建阳区",
+        "area_code": "350703",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市顺昌县",
+        "area_short_name": "顺昌县",
+        "area_code": "350721",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市浦城县",
+        "area_short_name": "浦城县",
+        "area_code": "350722",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市光泽县",
+        "area_short_name": "光泽县",
+        "area_code": "350723",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市松溪县",
+        "area_short_name": "松溪县",
+        "area_code": "350724",
+        "super_code": "350700"
+      },
+      {
+        "area_name": "福建省南平市政和县",
+        "area_short_name": "政和县",
+        "area_code": "350725",
+        "super_code": "350700"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省龙岩市",
+    "city_short_name": "福建省龙岩市",
+    "city_code": "350800",
+    "districts": [
+      {
+        "area_name": "福建省龙岩市新罗区",
+        "area_short_name": "新罗区",
+        "area_code": "350802",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市永定区",
+        "area_short_name": "永定区",
+        "area_code": "350803",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市上杭县",
+        "area_short_name": "上杭县",
+        "area_code": "350823",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市武平县",
+        "area_short_name": "武平县",
+        "area_code": "350824",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市长汀县",
+        "area_short_name": "长汀县",
+        "area_code": "350821",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市连城县",
+        "area_short_name": "连城县",
+        "area_code": "350825",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "福建省龙岩市漳平市",
+        "area_short_name": "漳平市",
+        "area_code": "350881",
+        "super_code": "350800"
+      },
+      {
+        "area_name": "龙岩高新区（经开区）",
+        "area_short_name": "经开区（高新区）",
+        "area_code": "350888",
+        "super_code": "350800"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省宁德市",
+    "city_short_name": "福建省宁德市",
+    "city_code": "350900",
+    "districts": [
+      {
+        "area_name": "福建省宁德市蕉城区",
+        "area_short_name": "蕉城区",
+        "area_code": "350902",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市福安市",
+        "area_short_name": "福安市",
+        "area_code": "350981",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市福鼎市",
+        "area_short_name": "福鼎市",
+        "area_code": "350982",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市霞浦县",
+        "area_short_name": "霞浦县",
+        "area_code": "350921",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市寿宁县",
+        "area_short_name": "寿宁县",
+        "area_code": "350924",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市周宁县",
+        "area_short_name": "周宁县",
+        "area_code": "350925",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市柘荣县",
+        "area_short_name": "柘荣县",
+        "area_code": "350926",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市古田县",
+        "area_short_name": "古田县",
+        "area_code": "350922",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "福建省宁德市屏南县",
+        "area_short_name": "屏南县",
+        "area_code": "350923",
+        "super_code": "350900"
+      },
+      {
+        "area_name": "东侨经济技术开发区",
+        "area_short_name": "东侨区",
+        "area_code": "350901",
+        "super_code": "350900"
+      }
+    ]
+  },
+  {
+    "city_name": "福建省平潭综合实验区",
+    "city_short_name": "福建省平潭综合实验区",
+    "city_code": "350128",
+    "districts": []
+  }
+]

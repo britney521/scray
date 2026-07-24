@@ -4,8 +4,9 @@ import json
 import os
 import random
 import re
+import sys
 import time
-from datetime import date
+from datetime import date, datetime
 from io import BytesIO
 from html import unescape
 from pathlib import Path
@@ -26,6 +27,10 @@ SEARCH_URL = f"{BASE_URL}/eap/credit.searchMsg"
 LIST_URL = f"{BASE_URL}/eap/credit.showProjectInfo"
 CAPTCHA_URL = f"{BASE_URL}/eap/credit.vcodecheck"
 DETAIL_URL = f"{BASE_URL}/eap/credit.publicShow"
+AREA_TREE_URL = (
+    f"{BASE_URL}/tzxm/command/ajax/"
+    "com.hrt.tzxm.areaclassify.cmd.AreaClassifyQueryCmd/getAreaClassifyTree"
+)
 
 
 HEADERS = {
@@ -64,6 +69,57 @@ CSV_FIELDNAMES = [
 ]
 
 
+def app_dir() -> Path:
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parent
+
+
+def load_config() -> Dict[str, Any]:
+    config_path = Path(os.getenv("CONFIG_FILE", app_dir() / "config.json"))
+    if not config_path.exists():
+        logger.warning("未找到配置文件：{}，使用代码默认配置", config_path)
+        return {}
+    with config_path.open("r", encoding="utf-8") as f:
+        config = json.load(f)
+    if not isinstance(config, dict):
+        raise ValueError(f"配置文件格式错误，根节点必须是对象：{config_path}")
+    logger.info("已读取配置文件：{}", config_path)
+    return config
+
+
+def config_value(config: Dict[str, Any], key: str, env_key: str, default: str) -> str:
+    value = os.getenv(env_key)
+    if value is not None:
+        return value
+    value = config.get(key, default)
+    if value is None:
+        return ""
+    return str(value)
+
+
+def validate_date_value(value: str, field_name: str, *, default_today: bool = False) -> str:
+    value = str(value or "").strip()
+    if not value and default_today:
+        return date.today().isoformat()
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise ValueError(f"{field_name} 日期格式错误：{value!r}，正确格式是 YYYY-MM-DD，例如 2026-07-24")
+    datetime.strptime(value, "%Y-%m-%d")
+    return value
+
+
+def safe_filename_part(value: str) -> str:
+    value = clean_text(value)
+    value = re.sub(r'[\\/:*?"<>|]+', "_", value)
+    value = value.strip(" ._")
+    return value or "未命名"
+
+
+def default_output_csv(front_time: str, area_name: str) -> str:
+    area = area_name.strip() or "福建省"
+    return f"{safe_filename_part(front_time)}_{safe_filename_part(area)}.csv"
+
+
 def generate_timestamp() -> str:
     first_12 = str(int(time.time() * 1000))[:12]
     check_digit = sum(int(i) for i in first_12) % 10
@@ -91,6 +147,16 @@ def parse_json_response(text: str) -> Dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError(f"unexpected json type: {type(data).__name__}")
     return data
+
+
+def iter_dicts(value: Any):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from iter_dicts(child)
+    elif isinstance(value, list):
+        for item in value:
+            yield from iter_dicts(item)
 
 
 def pick(data: Dict[str, Any], *names: str, default: Any = None) -> Any:
@@ -299,6 +365,171 @@ def warmup(session: requests.Session) -> None:
     session.get(f"{LIST_URL}?timestamp={generate_timestamp()}", timeout=20)
 
 
+def fetch_area_tree(session: requests.Session, super_code: str = "350000") -> Dict[str, Any]:
+    payload = {
+        "params": {
+            "javaClass": "ParameterSet",
+            "map": {"superCode": super_code},
+            "length": 1,
+        },
+        "context": {
+            "javaClass": "HashMap",
+            "map": {},
+            "length": 0,
+        },
+    }
+    response = session.post(
+        AREA_TREE_URL,
+        json=payload,
+        headers={
+            **HEADERS,
+            "Accept": "*/*",
+            "Content-Type": "application/json",
+            "Referer": f"{BASE_URL}/tzxm/jsp/tzxm/areaclassify/queryAreaClassify.jsp",
+        },
+        timeout=20,
+    )
+    response.raise_for_status()
+    data = json.loads(response.text.strip())
+    if isinstance(data, str):
+        data = json.loads(data)
+    if isinstance(data, list):
+        return {"data": data}
+    if isinstance(data, dict):
+        return data
+    raise ValueError(f"unexpected area tree response type: {type(data).__name__}")
+
+
+def extract_area_nodes(tree: Dict[str, Any]) -> List[Dict[str, str]]:
+    name_keys = ["name", "text", "label", "areaName", "AreaName", "cantName", "CANTNAME", "CANT_NAME", "SHORT_NAME"]
+    code_keys = ["code", "id", "value", "areaCode", "AreaCode", "cantCode", "CANTCODE", "CANT_CODE"]
+    nodes = []
+    seen = set()
+    for item in iter_dicts(tree):
+        name = next((item.get(key) for key in name_keys if item.get(key)), None)
+        code = next((item.get(key) for key in code_keys if item.get(key)), None)
+        if name is None or code is None:
+            continue
+        name = clean_text(str(name))
+        code = clean_text(str(code))
+        if not name or not code:
+            continue
+        key = (name, code)
+        if key in seen:
+            continue
+        seen.add(key)
+        nodes.append(
+            {
+                "name": name,
+                "code": code,
+                "short_name": clean_text(str(item.get("SHORT_NAME") or name)),
+                "super_code": clean_text(str(item.get("SUPER_CODE") or "")),
+                "type": clean_text(str(item.get("CANT_TYPE") or "")),
+                "count": item.get("COUNT"),
+            }
+        )
+    return nodes
+
+
+def download_area_codes(session: requests.Session, output_path: str = "area_codes.json") -> List[Dict[str, Any]]:
+    cities = extract_area_nodes(fetch_area_tree(session, "350000"))
+    result = []
+    logger.info("开始下载福建省市/区编码：市级数量 {}", len(cities))
+
+    for city in cities:
+        city_code = city["code"]
+        districts = extract_area_nodes(fetch_area_tree(session, city_code))
+        logger.info("地区编码：{}({}) -> 区县 {} 个", city["name"], city_code, len(districts))
+        result.append(
+            {
+                "city_name": city["name"],
+                "city_short_name": city.get("short_name", ""),
+                "city_code": city_code,
+                "districts": [
+                    {
+                        "area_name": district["name"],
+                        "area_short_name": district.get("short_name", ""),
+                        "area_code": district["code"],
+                        "super_code": district.get("super_code", city_code),
+                    }
+                    for district in districts
+                ],
+            }
+        )
+        time.sleep(random.uniform(0.1, 0.3))
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(result, f, ensure_ascii=False, indent=2)
+    logger.info("地区编码下载完成：{}，共 {} 个市", output_path, len(result))
+    return result
+
+
+def resolve_area_code_from_file(area_name: str, path: str = "area_codes.json") -> str:
+    area_name = clean_text(area_name)
+    area_path = Path(path)
+    if not area_name or not area_path.exists():
+        return ""
+    data = json.loads(area_path.read_text(encoding="utf-8"))
+    candidates = []
+    for city in data:
+        candidates.append((city.get("city_name", ""), city.get("city_code", "")))
+        candidates.append((city.get("city_short_name", ""), city.get("city_code", "")))
+        for district in city.get("districts", []):
+            candidates.append((district.get("area_name", ""), district.get("area_code", "")))
+            candidates.append((district.get("area_short_name", ""), district.get("area_code", "")))
+    for name, code in candidates:
+        if clean_text(str(name)) == area_name and code:
+            logger.info("从本地地区编码文件匹配：{} -> {}", area_name, code)
+            return str(code)
+    for name, code in candidates:
+        name = clean_text(str(name))
+        if code and name and (area_name in name or name in area_name):
+            logger.warning("从本地地区编码文件模糊匹配：{} -> {}({})", area_name, name, code)
+            return str(code)
+    return ""
+
+
+def resolve_area_code(session: requests.Session, area_name: str, default_super_code: str = "350000") -> str:
+    area_name = clean_text(area_name)
+    if not area_name:
+        return ""
+
+    file_code = resolve_area_code_from_file(area_name)
+    if file_code:
+        return file_code
+
+    visited = set()
+    queue = [default_super_code]
+    fuzzy_match = ""
+
+    while queue:
+        super_code = queue.pop(0)
+        if super_code in visited:
+            continue
+        visited.add(super_code)
+
+        tree = fetch_area_tree(session, super_code)
+        nodes = extract_area_nodes(tree)
+        logger.info("正在查询地区编码：上级编码={}，返回 {} 个地区", super_code, len(nodes))
+
+        for node in nodes:
+            if node["name"] == area_name:
+                logger.info("已匹配地区：{} -> {}", node["name"], node["code"])
+                return node["code"]
+            if not fuzzy_match and (area_name in node["name"] or node["name"] in area_name):
+                fuzzy_match = node["code"]
+
+        for node in nodes:
+            code = node["code"]
+            if code.isdigit() and len(code) >= 6 and code not in visited:
+                queue.append(code)
+
+    if fuzzy_match:
+        logger.warning("未找到完全匹配地区：{}，使用模糊匹配编码：{}", area_name, fuzzy_match)
+        return fuzzy_match
+    raise RuntimeError(f"未能通过地区树接口找到 area_code：{area_name}")
+
+
 def get_slide_captcha(session: requests.Session) -> Dict[str, Any]:
     response = session.post(
         CAPTCHA_URL,
@@ -400,8 +631,8 @@ def query_projects(
     front_time: str = "2025-01-01",
     behind_time: str = "",
     project_type: str = "",
-    area_name: str = "长泰区",
-    area_code: str = "350625",
+    area_name: str = "",
+    area_code: str = "",
     is_in: str = "",
     enterprise_name: str = "",
 ) -> str:
@@ -605,26 +836,51 @@ def clear_captcha_images() -> None:
     logger.info("已清空验证码图片目录：{}，删除 {} 个文件", debug_dir, deleted)
 
 
+def pause_when_frozen() -> None:
+    if getattr(sys, "frozen", False):
+        try:
+            input("程序运行结束，按回车键退出...")
+        except EOFError:
+            pass
+
+
 def main() -> None:
     session = make_session()
+    if os.getenv("DOWNLOAD_AREAS", "0") == "1":
+        download_area_codes(session, os.getenv("AREA_CODES_JSON", "area_codes.json"))
+        return
+
     warmup(session)
+    config = load_config()
+
+    front_time = validate_date_value(
+        config_value(config, "front_time", "FRONT_TIME", "2025-01-01"),
+        "front_time",
+    )
+    behind_time = validate_date_value(
+        config_value(config, "behind_time", "BEHIND_TIME", ""),
+        "behind_time",
+        default_today=True,
+    )
 
     query = {
         "project_name": os.getenv("PROJECT_NAME", "光伏"),
         "project_code": os.getenv("PROJECT_CODE", ""),
-        "front_time": os.getenv("FRONT_TIME", "2025-01-01"),
-        "behind_time": os.getenv("BEHIND_TIME", date.today().isoformat()),
+        "front_time": front_time,
+        "behind_time": behind_time,
         "project_type": os.getenv("PROJECT_TYPE", ""),
-        "area_name": os.getenv("AREA_NAME", "长泰区"),
-        "area_code": os.getenv("AREA_CODE", "350625"),
+        "area_name": config_value(config, "area_name", "AREA_NAME", ""),
+        "area_code": config_value(config, "area_code", "AREA_CODE", ""),
         "is_in": os.getenv("IS_IN", ""),
         "enterprise_name": os.getenv("ENTERPRISE_NAME", ""),
     }
+    if query["area_name"] and not query["area_code"]:
+        query["area_code"] = resolve_area_code(session, query["area_name"])
     # MAX_PAGES=0 means keep turning pages until an empty page is returned.
     max_pages = int(os.getenv("MAX_PAGES", "0"))
     start_page = int(os.getenv("START_PAGE", "1"))
     with_detail = os.getenv("WITH_DETAIL", "1") != "0"
-    output_csv = os.getenv("OUTPUT_CSV", "results.csv")
+    output_csv = os.getenv("OUTPUT_CSV", default_output_csv(front_time, query["area_name"]))
 
     logger.info(
         "开始采集：起始页={}，最大页数={}，是否请求详情={}，输出文件={}，查询条件={}",
@@ -651,3 +907,4 @@ if __name__ == "__main__":
         main()
     finally:
         clear_captcha_images()
+        pause_when_frozen()

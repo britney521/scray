@@ -39,4 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: fj-eap-spider-windows
-          path: dist/fj-eap-spider.exe
+          path: |
+            dist/fj-eap-spider.exe
+            config.json
+            area_codes.json
