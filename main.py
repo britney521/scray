@@ -98,11 +98,13 @@ def config_value(config: Dict[str, Any], key: str, env_key: str, default: str) -
     return str(value)
 
 
-def validate_date_value(value: str, field_name: str, *, default_today: bool = False) -> str:
+def validate_date_value(value: str, field_name: str, *, allow_empty: bool = False, default_today: bool = False) -> str:
     value = str(value or "").strip()
+    if not value and allow_empty:
+        return ""
     if not value and default_today:
         return date.today().isoformat()
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+    if value != '' and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
         raise ValueError(f"{field_name} 日期格式错误：{value!r}，正确格式是 YYYY-MM-DD，例如 2026-07-24")
     datetime.strptime(value, "%Y-%m-%d")
     return value
@@ -116,6 +118,7 @@ def safe_filename_part(value: str) -> str:
 
 
 def default_output_csv(front_time: str, area_name: str) -> str:
+    front_time = front_time or "全部日期"
     area = area_name.strip() or "福建省"
     return f"{safe_filename_part(front_time)}_{safe_filename_part(area)}.csv"
 
@@ -854,8 +857,9 @@ def main() -> None:
     config = load_config()
 
     front_time = validate_date_value(
-        config_value(config, "front_time", "FRONT_TIME", "2025-01-01"),
+        config_value(config, "front_time", "FRONT_TIME", ""),
         "front_time",
+        allow_empty=True,
     )
     behind_time = validate_date_value(
         config_value(config, "behind_time", "BEHIND_TIME", ""),

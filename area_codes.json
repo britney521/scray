@@ -92,60 +92,60 @@
   },
   {
     "city_name": "福建省厦门市",
-    "city_short_name": "福建省厦门市",
+    "city_short_name": "厦门市",
     "city_code": "350200",
     "districts": [
       {
         "area_name": "福建省厦门市思明区",
-        "area_short_name": "福建省厦门市思明区",
+        "area_short_name": "思明区",
         "area_code": "350203",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门市海沧区",
-        "area_short_name": "福建省厦门市海沧区",
+        "area_short_name": "海沧区",
         "area_code": "350205",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门市湖里区",
-        "area_short_name": "福建省厦门市湖里区",
+        "area_short_name": "湖里区",
         "area_code": "350206",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门市集美区",
-        "area_short_name": "福建省厦门市集美区",
+        "area_short_name": "集美区",
         "area_code": "350211",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门市同安区",
-        "area_short_name": "福建省厦门市同安区",
+        "area_short_name": "同安区",
         "area_code": "350212",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门市翔安区",
-        "area_short_name": "福建省厦门市翔安区",
+        "area_short_name": "翔安区",
         "area_code": "350213",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门鼓浪屿",
-        "area_short_name": "福建省厦门鼓浪屿",
+        "area_short_name": "鼓浪屿",
         "area_code": "350297",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门火炬管委会",
-        "area_short_name": "福建省厦门火炬管委会",
+        "area_short_name": "火炬管委会",
         "area_code": "350298",
         "super_code": "350200"
       },
       {
         "area_name": "福建省厦门自贸委",
-        "area_short_name": "福建省厦门自贸委",
+        "area_short_name": "自贸委",
         "area_code": "350299",
         "super_code": "350200"
       }
